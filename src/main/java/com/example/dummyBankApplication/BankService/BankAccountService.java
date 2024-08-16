@@ -21,4 +21,26 @@ public class BankAccountService {
     public BankAccount getAccountById(Long id){
         return bankAccountRepositary.findById(id).orElse(null);
     }
+
+    public BankAccount putAccountById(Long id, BankAccount updatedAccount) {
+        return bankAccountRepositary.findById(id).map(existingAccount -> {
+            existingAccount.setAccountHolderName(updatedAccount.getAccountHolderName());
+            existingAccount.setAccountNumber(updatedAccount.getAccountNumber());
+            existingAccount.setBalance(updatedAccount.getBalance());
+            existingAccount.setGender(updatedAccount.getGender());
+            existingAccount.setAccountType(updatedAccount.getAccountType());
+            existingAccount.setEmail(updatedAccount.getEmail());
+            existingAccount.setPhoneNumber(updatedAccount.getPhoneNumber());
+            existingAccount.setStreetAddress(updatedAccount.getStreetAddress());
+            existingAccount.setCity(updatedAccount.getCity());
+            existingAccount.setState(updatedAccount.getState());
+            existingAccount.setPostalCode(updatedAccount.getPostalCode());
+            existingAccount.setCountry(updatedAccount.getCountry());
+            return bankAccountRepositary.save(existingAccount);
+        }).orElse(null);
+    }
+
+    public void deleteAccountById(Long id) {
+        bankAccountRepositary.deleteById(id);
+    }
 }

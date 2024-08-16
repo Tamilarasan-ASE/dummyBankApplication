@@ -25,4 +25,12 @@ public class BankAccountController {
     public BankAccount getAccountById(@PathVariable Long id){
         return bankAccountService.getAccountById(id);
     }
+    @PutMapping("/{id}")
+    public BankAccount putAccountById(@PathVariable Long id,@RequestBody BankAccount updatedAccount) {
+        return bankAccountService.putAccountById(id, updatedAccount);
+    }
+    @DeleteMapping("/{id}")
+    public void deleteAccountById(@PathVariable Long id){
+        bankAccountService.deleteAccountById(id);
+    }
 }
